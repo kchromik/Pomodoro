@@ -1,0 +1,4 @@
+Place your background images here:
+- forest-bg.jpg: Forest background
+- cabin-bg.jpg: Cabin background
+- lofi-bg.jpg: Lofi illustration background

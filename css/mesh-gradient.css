@@ -1,0 +1,200 @@
+/**
+ * Mesh Gradient Animation Styles
+ * Creates a modern, animated gradient background effect
+ */
+
+.mesh-gradient-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    will-change: contents;
+}
+
+/* Ersten Gradient */
+.mesh-gradient {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        var(--gradient-angle, 0deg),
+        var(--gradient-color1, #ff7eb3),
+        var(--gradient-color2, #7eb3ff),
+        var(--gradient-color3, #baff7e),
+        var(--gradient-color4, #ffa87e)
+    );
+    animation: gradient-rotation 15s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+    opacity: 0.8;
+    filter: blur(40px);
+    will-change: transform, opacity;
+}
+
+/* Zweiter Gradient für mehr Tiefe und Bewegung */
+.mesh-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        calc(var(--gradient-angle, 0deg) + 45deg),
+        var(--gradient-color4, #ffa87e),
+        var(--gradient-color3, #baff7e),
+        var(--gradient-color2, #7eb3ff),
+        var(--gradient-color1, #ff7eb3)
+    );
+    animation: gradient-rotation-alt 18s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+    mix-blend-mode: screen;
+    opacity: 0.8;
+}
+
+.mesh-gradient::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    animation: pulse 8s ease-in-out infinite alternate;
+    mix-blend-mode: overlay;
+}
+
+.mesh-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(var(--bg-color-rgb), 0.15) 60%,
+        rgba(var(--bg-color-rgb), 0.4) 100%
+    );
+}
+
+/* Theme Variations */
+.theme-default .mesh-gradient {
+    --gradient-color1: #ff7eb3;
+    --gradient-color2: #7eb3ff;
+    --gradient-color3: #baff7e;
+    --gradient-color4: #ffa87e;
+}
+
+.theme-focus .mesh-gradient {
+    --gradient-color1: #5e60ce;
+    --gradient-color2: #5390d9;
+    --gradient-color3: #4ea8de;
+    --gradient-color4: #48bfe3;
+}
+
+.theme-relax .mesh-gradient {
+    --gradient-color1: #06d6a0;
+    --gradient-color2: #1b9aaa;
+    --gradient-color3: #ef476f;
+    --gradient-color4: #f78c6b;
+}
+
+.theme-dark .mesh-gradient {
+    --gradient-color1: #0f0f12;
+    --gradient-color2: #232335;
+    --gradient-color3: #181824;
+    --gradient-color4: #2a2a3a;
+}
+
+/* Animations */
+@keyframes gradient-rotation {
+    0% {
+        transform: rotate(0deg) scale(1);
+        --gradient-angle: 0deg;
+    }
+    50% {
+        --gradient-angle: 180deg;
+    }
+    100% {
+        transform: rotate(360deg) scale(1.1);
+        --gradient-angle: 360deg;
+    }
+}
+
+@keyframes gradient-rotation-alt {
+    0% {
+        transform: rotate(0deg) scale(1.05);
+        --gradient-angle: 45deg;
+    }
+    50% {
+        --gradient-angle: 225deg;
+    }
+    100% {
+        transform: rotate(-360deg) scale(0.95);
+        --gradient-angle: 405deg;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(1.05);
+    }
+}
+
+/* Mesh Gradient Animation Controls */
+.gradient-speed-slow .mesh-gradient {
+    animation-duration: 30s;
+}
+.gradient-speed-slow .mesh-gradient::before {
+    animation-duration: 36s;
+}
+.gradient-speed-slow .mesh-gradient::after {
+    animation-duration: 15s;
+}
+
+.gradient-speed-normal .mesh-gradient {
+    animation-duration: 15s;
+}
+.gradient-speed-normal .mesh-gradient::before {
+    animation-duration: 18s;
+}
+.gradient-speed-normal .mesh-gradient::after {
+    animation-duration: 8s;
+}
+
+.gradient-speed-fast .mesh-gradient {
+    animation-duration: 8s;
+}
+.gradient-speed-fast .mesh-gradient::before {
+    animation-duration: 10s;
+}
+.gradient-speed-fast .mesh-gradient::after {
+    animation-duration: 4s;
+}
+
+/* Mesh Gradient Intensity Controls */
+.gradient-intensity-subtle .mesh-gradient {
+    opacity: 0.5;
+    filter: blur(60px);
+}
+
+.gradient-intensity-medium .mesh-gradient {
+    opacity: 0.8;
+    filter: blur(40px);
+}
+
+.gradient-intensity-vibrant .mesh-gradient {
+    opacity: 0.9;
+    filter: blur(30px);
+}

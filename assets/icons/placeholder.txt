@@ -1,0 +1,4 @@
+Place your icon files here:
+- favicon.png: Small favicon for browser tabs
+- icon-192x192.png: App icon for PWA (192x192 pixels)
+- icon-512x512.png: App icon for PWA (512x512 pixels)

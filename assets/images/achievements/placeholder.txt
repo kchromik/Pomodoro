@@ -1,0 +1,4 @@
+Place your achievement images here:
+- achievement-1.png: First achievement (single pomodoro)
+- achievement-2.png: Second achievement (4 pomodoros)
+- achievement-3.png: Third achievement (10 pomodoros)

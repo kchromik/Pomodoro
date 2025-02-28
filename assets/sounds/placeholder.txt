@@ -1,0 +1,6 @@
+Place your sound files here:
+- timer-complete.mp3: Sound played when timer completes
+- rain.mp3: Rain ambient sound
+- forest.mp3: Forest ambient sound
+- waves.mp3: Ocean waves ambient sound
+- lofi.mp3: Lofi music ambient sound

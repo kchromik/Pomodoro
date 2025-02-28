@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ein gemütlicher Pomodoro Timer für mehr Produktivität und Entspannung">
+    <meta name="theme-color" content="#2c3e50">
+    <title>Cozy Pomodoro Timer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mesh-gradient.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+    <!-- Font Awesome for icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="theme-light" data-background="forest">
+    <div class="background-overlay"></div>
+    
+    <header>
+        <div class="logo">
+            <h1>Cozy Pomodoro</h1>
+        </div>
+        <div class="controls">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="fullscreen-toggle" class="icon-btn" aria-label="Toggle Fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="left-panel">
+                <div class="timer-section">
+                    <div class="timer-container">
+                        <div class="timer-progress">
+                            <svg class="timer-svg" viewBox="0 0 100 100">
+                                <circle class="timer-background" cx="50" cy="50" r="45"></circle>
+                                <circle class="timer-foreground" cx="50" cy="50" r="45"></circle>
+                            </svg>
+                            <div class="timer-display">
+                                <span id="minutes">25</span>:<span id="seconds">00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timer-mode">
+                        <button class="mode-btn active" data-mode="pomodoro">Pomodoro</button>
+                        <button class="mode-btn" data-mode="short-break">Kurze Pause</button>
+                        <button class="mode-btn" data-mode="long-break">Lange Pause</button>
+                    </div>
+                    <div class="timer-controls">
+                        <button id="start-btn" class="control-btn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="pause-btn" class="control-btn hidden">
+                            <i class="fas fa-pause"></i>
+                        </button>
+                        <button id="reset-btn" class="control-btn">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2>Einstellungen</h2>
+                    <div class="timer-settings">
+                        <div class="setting">
+                            <label for="pomodoro-time">Pomodoro:</label>
+                            <input type="number" id="pomodoro-time" min="1" max="60" value="25">
+                        </div>
+                        <div class="setting">
+                            <label for="short-break-time">Kurze Pause:</label>
+                            <input type="number" id="short-break-time" min="1" max="30" value="5">
+                        </div>
+                        <div class="setting">
+                            <label for="long-break-time">Lange Pause:</label>
+                            <input type="number" id="long-break-time" min="1" max="60" value="15">
+                        </div>
+                        <div class="setting">
+                            <label for="auto-start">Auto-Start Pausen:</label>
+                            <input type="checkbox" id="auto-start" class="toggle">
+                        </div>
+                        <div class="setting">
+                            <label for="notification">Benachrichtigungen:</label>
+                            <input type="checkbox" id="notification" class="toggle" checked>
+                        </div>
+                        <div class="setting">
+                            <label for="focus-mode">Fokus-Modus:</label>
+                            <input type="checkbox" id="focus-mode" class="toggle">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h2>Hintergrund Gradient</h2>
+                    <div class="gradient-controls">
+                        <div class="control-group">
+                            <label>Gradient-Thema:</label>
+                            <div class="button-group">
+                                <button class="gradient-theme-btn active" data-theme="default">Standard</button>
+                                <button class="gradient-theme-btn" data-theme="focus">Fokus</button>
+                                <button class="gradient-theme-btn" data-theme="relax">Entspannung</button>
+                                <button class="gradient-theme-btn" data-theme="dark">Dunkel</button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Animation Geschwindigkeit:</label>
+                            <div class="button-group">
+                                <button class="gradient-speed-btn" data-speed="slow">Langsam</button>
+                                <button class="gradient-speed-btn active" data-speed="normal">Normal</button>
+                                <button class="gradient-speed-btn" data-speed="fast">Schnell</button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label>Intensität:</label>
+                            <div class="button-group">
+                                <button class="gradient-intensity-btn" data-intensity="subtle">Subtil</button>
+                                <button class="gradient-intensity-btn active" data-intensity="medium">Medium</button>
+                                <button class="gradient-intensity-btn" data-intensity="vibrant">Intensiv</button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <button id="toggle-gradient" class="btn">Gradient deaktivieren</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ambient-section">
+                    <h2>Ambiente</h2>
+                    <div class="background-selector">
+                        <button class="bg-btn active" data-bg="forest">
+                            <i class="fas fa-tree"></i> Wald
+                        </button>
+                        <button class="bg-btn" data-bg="cabin">
+                            <i class="fas fa-home"></i> Hütte
+                        </button>
+                        <button class="bg-btn" data-bg="lofi">
+                            <i class="fas fa-headphones"></i> Lofi
+                        </button>
+                    </div>
+                    <div class="sound-selector">
+                        <h3>Soundscapes</h3>
+                        <div class="sounds">
+                            <button class="sound-btn" data-sound="rain">
+                                <i class="fas fa-cloud-rain"></i> Regen
+                            </button>
+                            <button class="sound-btn" data-sound="forest">
+                                <i class="fas fa-leaf"></i> Wald
+                            </button>
+                            <button class="sound-btn" data-sound="waves">
+                                <i class="fas fa-water"></i> Meer
+                            </button>
+                            <button class="sound-btn" data-sound="lofi">
+                                <i class="fas fa-music"></i> Lofi
+                            </button>
+                            <button class="sound-btn active" data-sound="none">
+                                <i class="fas fa-volume-mute"></i> Stille
+                            </button>
+                        </div>
+                        <div class="volume-control">
+                            <label for="volume">Lautstärke:</label>
+                            <input type="range" id="volume" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="task-section">
+                    <h2>Aufgaben</h2>
+                    <div class="add-task">
+                        <input type="text" id="task-input" placeholder="Neue Aufgabe hinzufügen...">
+                        <button id="add-task-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <ul class="task-list" id="task-list">
+                        <!-- Tasks will be added dynamically -->
+                    </ul>
+                </div>
+
+                <div class="notes-section">
+                    <h2>Notizen</h2>
+                    <textarea id="notes" placeholder="Deine Gedanken hier..."></textarea>
+                </div>
+
+                <div class="stats-section">
+                    <h2>Statistiken</h2>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="today-count">0</span>
+                            <span class="stat-label">Heute</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="week-count">0</span>
+                            <span class="stat-label">Diese Woche</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="month-count">0</span>
+                            <span class="stat-label">Diesen Monat</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="total-count">0</span>
+                            <span class="stat-label">Insgesamt</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="weekly-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="focus-mode-overlay" class="hidden">
+        <div class="focus-mode-content">
+            <h2>Fokus-Modus aktiv</h2>
+            <p>Fokussiere dich auf deine Arbeit. Entsperren nach Ende der Session.</p>
+            <button id="exit-focus-mode" class="secondary-btn">Jetzt verlassen</button>
+        </div>
+    </div>
+
+    <div id="reward-popup" class="hidden">
+        <div class="reward-content">
+            <h2>Glückwunsch!</h2>
+            <p id="reward-message">Du hast einen Pomodoro-Zyklus erfolgreich abgeschlossen!</p>
+            <div class="achievement">
+                <img id="achievement-img" src="assets/images/achievements/achievement-1.png" alt="Achievement">
+            </div>
+            <button id="close-reward" class="primary-btn">Weiter</button>
+        </div>
+    </div>
+
+    <!-- Audio files -->
+    <audio id="timer-complete" src="assets/sounds/timer-complete.mp3"></audio>
+    <audio id="sound-rain" src="assets/sounds/rain.mp3" loop></audio>
+    <audio id="sound-forest" src="assets/sounds/forest.mp3" loop></audio>
+    <audio id="sound-waves" src="assets/sounds/waves.mp3" loop></audio>
+    <audio id="sound-lofi" src="assets/sounds/lofi.mp3" loop></audio>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/ambient.js"></script>
+    <script src="js/mesh-gradient.js"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => console.log('ServiceWorker registered successfully'))
+                    .catch(err => console.log('ServiceWorker registration failed: ', err));
+            });
+        }
+    </script>
+</body>
+</html>
